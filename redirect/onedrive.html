@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OneDrive Rediect</title>
+</head>
+<body>
+    <p>正在跳转请稍后</p>
+    <script>
+    var query = (function() {
+        var url = location.search, reg = /(?:\?|&)?([^=]+)=([^&]*)/ig, obj = {}, m;
+        while (m = reg.exec(url)) obj[m[1]] = m[2];
+        return function(v) {
+            if (arguments.length == 0) return obj;
+            else return obj[v];
+        }
+    })();
+
+    var url = query('state'),code = query('code');
+    if (url && code) {
+        window.location = decodeURIComponent(url) + "?code=" + code;
+    } else {
+        alert('无效的请求')
+    }
+    </script>
+</body>
+
+</html>
