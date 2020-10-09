@@ -16,9 +16,15 @@
         }
     })();
 
-    var url = query('state'),code = query('code');
-    if (url && code) {
-        window.location = decodeURIComponent(url) + "?code=" + code;
+    var url = query('state'),code = query('code'),error = query('error_description') || query('error');
+    if (url) {
+        let rurl = decodeURIComponent(url)
+        if(code){
+          rurl += "?code="+code;
+        }else if(error){
+          rurl += "?error="+error;
+        }
+        window.location = rurl;
     } else {
         alert('无效的请求')
     }
