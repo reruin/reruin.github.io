@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ShareList Redirect</title>
+</head>
+<body>
+    <p>ShareList Redirect - 正在跳转请稍后</p>
+    <script>
+    var query = (function() {
+        var url = location.search, reg = /(?:\?|&)?([^=]+)=([^&]*)/ig, obj = {}, m;
+        while (m = reg.exec(url)) obj[m[1]] = m[2];
+        return function(v) {
+            if (arguments.length == 0) return obj;
+            else return obj[v];
+        }
+    })();
+
+    var url = query('state');
+    if (url) {
+        window.location = decodeURIComponent(url) + location.search;
+    } else {
+        alert('invalid request / 无效的请求')
+    }
+    </script>
+</body>
+
+</html>
